@@ -1,0 +1,69 @@
+
+import { ComfortLevel } from "comfort-level.slint";
+export component TimeScreen inherits Rectangle {
+    in property <bool> comfort: true;
+    in property <string> time: "22:03";
+    in property <string> date: "12/14";
+    in property <string> week-day: "周五";
+    in property <string> temperature: "26.0";
+    in property <string> humidity: "26.0";
+    width: 360px;
+    height: 260px;
+    background: gray;
+    border-radius: 5px;
+    ComfortLevel {
+        x: root.width - self.width;
+        y: 0;
+        comfort: root.comfort;
+    }
+    Rectangle {
+        width: 330px;
+        height: 140px;
+        x: root.width * 50% - self.width * 50%;
+        y: root.height * 50% - self.height * 50% - 40px;
+        Text {
+            text: time;
+            font-size: 140px;
+        }
+    }
+    Rectangle {
+        width: 60px;
+        height: 30px;
+        x: 220px;
+        y: root.height - self.height - 55px;
+        Text {
+            text: week-day;
+            font-size: 30px;
+        }
+    }
+    Rectangle {
+        width: 60px;
+        height: 30px;
+        x: 10px;
+        y: root.height - self.height - 10px;
+        Text {
+            text: date;
+            font-size: 30px;
+        }
+    }
+    Rectangle {
+        width: 60px;
+        height: 30px;
+        x: 150px;
+        y: root.height - self.height - 10px;
+        Text {
+            text: temperature + "℃";
+            font-size: 30px;
+        }
+    }
+    Rectangle {
+        width: 60px;
+        height: 30px;
+        x: 280px;
+        y: root.height - self.height - 10px;
+        Text {
+            text: humidity + "%";
+            font-size: 30px;
+        }
+    }
+}

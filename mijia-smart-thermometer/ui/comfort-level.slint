@@ -1,0 +1,11 @@
+
+export component ComfortLevel inherits Rectangle {
+    in property <bool> comfort: false;
+    width: 60px;
+    height: 30px;
+    Text {
+        text: comfort ? "(^_^)" : "(-_-)";
+        font-size: 22px;
+        vertical-alignment: center;
+    }
+}

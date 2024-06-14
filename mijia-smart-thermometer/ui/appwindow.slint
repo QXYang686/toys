@@ -1,0 +1,42 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+import { TimeScreen } from "time-screen.slint";
+import { WeekDay, ShowMode } from "types.slint";
+
+export component AppWindow inherits Window {
+    pure callback render-week-day(int) -> string;
+    pure callback render-time(int) -> string;
+    pure callback render-date(int) -> string;
+    pure callback render-temperature(float) -> string;
+    pure callback render-humidity(float) -> string;
+    pure callback render-comfort(float, float) -> bool;
+
+    render-week-day(int) => { "周五" }
+    render-time(int) => { "22:03" }
+    render-date(int) => { "6/14" }
+    render-temperature(float) => { "26.0" }
+    render-humidity(float) => { "72" }
+    render-comfort(float, float) => { true }
+
+    in property <ShowMode> show-mode: ShowMode.Time;
+    in property <int> timestamp: 0;
+    in property <float> temperature: 26.3;
+    in property <float> humidity: 26.3;
+    
+    Rectangle {
+        width: 400px;
+        height: 300px;
+        border-radius: 5px;
+        background: white;
+        if show-mode == ShowMode.Time: TimeScreen {
+            week-day: root.render-week-day(root.timestamp);
+            time: root.render-time(root.timestamp);
+            date: root.render-date(root.timestamp);
+            temperature: root.render-temperature(root.temperature);
+            humidity: root.render-humidity(root.humidity);
+            comfort: root.render-comfort(root.temperature, root.humidity);
+        }
+        if show-mode != ShowMode.Time: Text {
+            text: "Mode Not Implemented Yet";
+        }
+    }
+}
